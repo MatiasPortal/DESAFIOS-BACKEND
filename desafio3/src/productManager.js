@@ -44,14 +44,14 @@ class ProductManager {
     getProducts = async() => {    
             const productsFile = await fs.promises.readFile(this.path, "utf-8");
             const products = JSON.parse(productsFile)
-            console.log(products)
+            return products;
     }
 
     //buscar producto con id específico.
     getProductById = async (id) => {
             const productsFile = await fs.promises.readFile(this.path, "utf-8")
             const productID = JSON.parse(productsFile).find(prod => prod.id === id);
-            console.log(productID)
+            return productID;
     }
 
 
@@ -80,18 +80,4 @@ class ProductManager {
 
 }
 
-
-    const newProduct = new ProductManager("./desafio2/products.txt");
-
-    newProduct.addProduct("producto1", "descripcion1", 1000, "image1", "a123", 10);
-
-    newProduct.addProduct("producto2", "descripcion2", 2000, "image2", "a124", 15);
-
-    newProduct.getProducts(); //Llamar a los productos.
-
-    newProduct.getProductById(2); //Buscar producto por id.
-
-    newProduct.updateProduct(1, {price: 1300}) //modificar producto.
-
-    /* newProduct.deleteProduct(2); */ //Eliminar producto.
-    
+module.exports = ProductManager;

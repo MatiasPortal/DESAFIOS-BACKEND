@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "title": "Producto de prueba",
+    "description": "Este es un producto de prueba",
+    "code": "ABC123",
+    "price": 250,
+    "status": true,
+    "stock": 20,
+    "category": "prueba",
+    "thumbnails": [
+      "https://detallesorballo.com/wp-content/uploads/2020/09/imagen-de-prueba-320x240-1.jpg"
+    ],
+    "thumbnail": []
+  }
+]

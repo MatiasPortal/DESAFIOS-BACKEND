@@ -1,16 +1,35 @@
 [
   {
     "id": 1,
-    "title": "Producto de prueba",
-    "description": "Este es un producto de prueba",
-    "code": "ABC123",
-    "price": 250,
+    "title": "Ryzen 3",
+    "description": "procesador amd",
+    "code": "ABC342",
+    "price": 40000,
     "status": true,
-    "stock": 20,
-    "category": "prueba",
-    "thumbnails": [
-      "https://detallesorballo.com/wp-content/uploads/2020/09/imagen-de-prueba-320x240-1.jpg"
-    ],
+    "stock": 10,
+    "category": "componente",
+    "thumbnail": []
+  },
+  {
+    "id": 2,
+    "title": "Ryzen 7",
+    "description": "procesador amd",
+    "code": "ABC344",
+    "price": 50000,
+    "status": true,
+    "stock": 12,
+    "category": "componente",
+    "thumbnail": []
+  },
+  {
+    "id": 3,
+    "title": "Ryzen 5",
+    "description": "procesador amd",
+    "code": "ABC341",
+    "price": 50000,
+    "status": true,
+    "stock": 12,
+    "category": "componente",
     "thumbnail": []
   }
 ]

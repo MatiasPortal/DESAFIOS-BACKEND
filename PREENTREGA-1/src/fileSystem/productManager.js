@@ -19,14 +19,14 @@ class ProductManager {
     //agregar los productos.
     addProduct = async (product) => {
         try {
-            await this.getProducts(); // leo mis productos
-            let codProd = this.products.find((prod) => prod.code === product.code);
+            const productsFile = await this.getProducts() // leo mis productos
+            let codProd = productsFile.find((prod) => prod.code === product.code);
             let prodId = 0;
 
-            if (this.products.length === 0) {
+            if (productsFile.length === 0) {
                 prodId = 1; 
             } else {
-                prodId = this.products[this.products.length - 1].id + 1;
+                prodId = productsFile[productsFile.length - 1].id + 1;
             }
 
             if (
@@ -48,8 +48,9 @@ class ProductManager {
 
             if (codProd) return { status: "error", message: "Code repetido!" };
 
-            this.products.push({ id: prodId, ...product }); //pusheo mi producto
-            await fs.promises.writeFile(this.path, JSON.stringify(this.products, null, 2));
+            const prodToAdd = ({ id: prodId, ...product }); 
+            productsFile.push(prodToAdd);//pusheo mi producto
+            await fs.promises.writeFile(this.path, JSON.stringify(productsFile, null, 2));
             console.log(product); //Guardo mi array products en mi archivo.
             return `Se agregó el producto "${product.title}"`;
             
@@ -82,10 +83,11 @@ class ProductManager {
 
     deleteProduct = async(id) => {
         const productsFile = await fs.promises.readFile(this.path, "utf-8");
-        const productToDelete = JSON.parse(productsFile).filter(prod => prod.id === id)
-
-        this.products = productToDelete;
-        await fs.promises.writeFile(this.path, JSON.stringify(this.products))
+        const productToDelete = JSON.parse(productsFile);
+        const index = productToDelete.findIndex((prod) => prod.id === id)
+        productToDelete.splice(index, 1);
+        
+        await fs.promises.writeFile(this.path, JSON.stringify(productToDelete, null, 2))
         console.log(`se borró el producto con el id ${id}`)
     }
 }

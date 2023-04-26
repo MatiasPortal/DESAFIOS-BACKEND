@@ -19,7 +19,7 @@ routerCart.post("/carts", async(req, res) => {
 
         manager.addCart({ id: cartId, products: [] });//creo el carrito
 
-        res.status(200).send({ status:  "ok",  message: "Carrito creado"  });
+        res.status(200).send({ status:  "ok",  message: `Carrito con id: ${cartId} creado`  });
         
     } catch(err) {
         res.status(500).send({ status: "error", message: err.message });

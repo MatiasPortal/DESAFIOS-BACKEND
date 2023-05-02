@@ -33,7 +33,7 @@ servidor.use("/api", routerCart);
 servidor.use("/", routerViews);
 
 // Motor de plantillas
-servidor.engine('handlebars', engine());
+servidor.engine('handlebars', engine({ defaultLayout: "main", extname: ".handlebars" }));
 servidor.set('view engine', 'handlebars');
 servidor.set('views', './views');
 

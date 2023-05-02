@@ -31,5 +31,16 @@
     "category": "componente",
     "thumbnail": "C:\\fakepath\\image.png",
     "status": "True"
+  },
+  {
+    "id": 5,
+    "title": "Ryzen 3",
+    "description": "procesador amd",
+    "price": "70000",
+    "code": "ABC210",
+    "stock": "10",
+    "category": "componente",
+    "thumbnail": "",
+    "status": "True"
   }
 ]

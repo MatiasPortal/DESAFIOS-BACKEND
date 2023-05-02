@@ -18,7 +18,7 @@ routerViews.get('/',async(req,res)=>{
 
 routerViews.get('/realtimeproducts',async(req,res)=>{
     const currentProducts = await productManager.getProducts()
-    res.render('realtimeproducts',{products: currentProducts});
+    res.render('realTimeProducts',{products: currentProducts});
 });
 
 

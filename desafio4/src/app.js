@@ -38,7 +38,7 @@ servidor.set('view engine', 'handlebars');
 servidor.set('views', './views');
 
 // Contenidos estáticos
-servidor.use('/public', express.static(`${__dirname}/public`));
+/* servidor.use('/public', express.static(`${__dirname}/public`)); */
 
 //socket.io
 

@@ -1,0 +1,24 @@
+<div class="container-fluid">
+    <div class="row">
+        <header class="bg-success p-3">
+            <h1>PRODUCTOS</h1>
+        </header> 
+    </div>
+
+    <div class="row">
+        {{#each products}}
+            <div class="col-md-4 border my-3">
+                <div class="card" style="width: 18rem;"></div>
+                    <img src="{{this.thumbnail}}" class="card-img-top" alt="{{this.title}}">
+                    <div class="card-body text-center">
+                        <h3 class="card-title">{{this.title}}</h3>
+                        <p class="card-text">${{this.price}}</p>
+                        <p class="card-text">Descripción: {{this.description}}</p>
+                        <p class="card-text">Categoria: {{this.category}}</p>
+                        <p class="card-text">Codigo de producto: {{this.code}}</p>
+                        <p class="card-text">Stock: {{this.stock}}</p>
+                </div>
+            </div> 
+        {{/each}}       
+    </div>
+</div>

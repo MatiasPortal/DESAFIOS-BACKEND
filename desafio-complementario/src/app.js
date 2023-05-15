@@ -20,7 +20,8 @@ const managerDB = new ProductsDB();
 // Activar variables de entorno.
 dotenv.config({ path:"../.env" })
 const PUERTO = parseInt(process.env.PUERTO) || 8080;
-const MONGOOSE_URL = process.env.MONGOOSE_URL;
+/* const MONGOOSE_URL = process.env.MONGOOSE_URL; */
+const MONGOOSE_URL_ATLAS = process.env.MONGOOSE_URL_ATLAS;
 
 
 const WS_PORT = 8090;
@@ -77,7 +78,7 @@ io.on('connection', (socket) => {
 
 // Conexión del servidor.
 try {
-    await mongoose.connect(MONGOOSE_URL);
+    await mongoose.connect(MONGOOSE_URL_ATLAS);
 
     servidor.listen(PUERTO, () => {
         console.log(`Servidor iniciado en puerto: ${PUERTO}`);
@@ -87,6 +88,5 @@ try {
 }
 
 
-//arreglar update de producto.
 
 

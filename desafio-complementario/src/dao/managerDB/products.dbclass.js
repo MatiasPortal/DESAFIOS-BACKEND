@@ -17,7 +17,7 @@ class ProductsDB {
     //agregar los productos.
     addProduct = async (product) => {
         try {
-            const productsFile = await productModel.find().lean(); // leo mis productos
+            const productsFile = await this.getProducts() // leo mis productos
             let codProd = productsFile.find((prod) => prod.code === product.code);
             let prodId = 0;
 
@@ -47,8 +47,7 @@ class ProductsDB {
             if (codProd) return { status: "error", message: "Code repetido!" };
 
             const prodToAdd = ({ id: prodId, ...product }); 
-            productsFile.push(prodToAdd);//pusheo mi producto
-            await productModel.create(productsFile);
+            await productModel.create(prodToAdd);
             
             console.log(product);
             return `Se agregó el producto "${product.title}"`;
@@ -61,7 +60,7 @@ class ProductsDB {
     //buscar producto con id específico.
     getProductById = async (id) => {
         try {
-            return await productModel.findById(id);
+            return await productModel.findById({ '_id': new mongoose.Types.ObjectId(id) });
         }  catch(err) {
             return err;
         }      
@@ -70,8 +69,7 @@ class ProductsDB {
 
     updateProduct = async(id, object) => {
         try {
-            const data = productModel.updateOne({ '_id': new mongoose.Types.ObjectId(id) }, object);
-            data.modifiedCount === 0 ? console.log("el id no existe o no hay cambios para realizar") : console.log("Se actualizo el producto")
+            await productModel.findByIdAndUpdate({ '_id': new mongoose.Types.ObjectId(id) }, object)
         } catch(err) {
             return err;
         }

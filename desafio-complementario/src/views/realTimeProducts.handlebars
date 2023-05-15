@@ -19,7 +19,7 @@
                 </tr>
                 {{#each products}}
                 <tr>
-                    <td>{{this.id}}</td>
+                    <td>{{this._id}}</td>
                     <td>{{this.title}}</td>
                     <td>{{this.description}}</td>
                     <td>{{this.category}}</td>
@@ -76,7 +76,7 @@
 
         <form class="form">
         <label for="title" class="formLabels">ID del Producto</label>
-        <input type="number" id="delId" />
+        <input type="text" id="delId" />
 
         <button type="submit" id="delButton">Eliminar</button>
         </form>
@@ -93,7 +93,7 @@
     const deleteButton = document.getElementById("delButton");//btn eliminar producto
 
     const getId = () => {//Eliminar producto por id.
-        const idToDelete = parseInt(document.getElementById("delId").value);
+        const idToDelete = document.getElementById("delId").value;
         return idToDelete;
     }
 
@@ -143,7 +143,7 @@
 
     deleteButton.addEventListener("click", (e) => {
         let id = getId();
-        console.log(typeof id);
+        console.log(`Producto con el id: ${id} eliminado`);
         ws.emit("id", id);
     })
 </script>

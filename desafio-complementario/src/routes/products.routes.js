@@ -22,10 +22,9 @@ routerProducts.get("/products", async (req, res) => {
 routerProducts.get("/products/:pid", async (req, res) => {
     try {
         const pid = req.params.pid;
-        const products = await managerDB.getProducts();
-        const productId = products.find((prod) => prod.id == pid);
+        const product = await managerDB.getProductById(pid);
 
-        res.status(200).send( productId );
+        res.status(200).send( product );
     } catch(err) {
         res.status(400).send(err);
     }

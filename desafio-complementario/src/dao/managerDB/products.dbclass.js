@@ -49,8 +49,7 @@ class ProductsDB {
             const prodToAdd = ({ id: prodId, ...product }); 
             await productModel.create(prodToAdd);
             
-            console.log(product);
-            return `Se agregó el producto "${product.title}"`;
+            console.log(`Se agregó el producto "${product.title}"`);
             
         } catch (error) {
             return error;

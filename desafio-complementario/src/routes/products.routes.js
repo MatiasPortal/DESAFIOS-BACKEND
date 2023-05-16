@@ -61,10 +61,14 @@ routerProducts.put("/products/:pid", async (req, res) => {
 
 //DELETE - Eliminar producto.
 routerProducts.delete("/products/:pid", async (req, res) => {
-    const pid = req.params.pid;
-    await managerDB.deleteProduct(pid);
+    try {
+        const pid = req.params.pid;
+        await managerDB.deleteProduct(pid);
 
-    res.status(200).send("Producto eliminado");
+        res.status(200).send("Producto eliminado");
+    } catch(err) {
+        res.status(500).send(err);
+    }
 
 });
 

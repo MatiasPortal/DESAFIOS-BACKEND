@@ -6,6 +6,7 @@ import { __dirname } from "./utils.js";
 import { engine } from "express-handlebars";
 import express from "express";
 import mongoose from "mongoose"
+import productModel from './dao/models/products.model.js';
 import routerCart from "./routes/carts.routes.js";
 import routerProducts from "./routes/products.routes.js";
 import routerViews from "./routes/views.routes.js";
@@ -55,7 +56,7 @@ servidor.set('views', './views');
 // Contenidos estáticos
 servidor.use('/public', express.static(`${__dirname}/public`));
 
-// socket.io con fileSystem.
+// socket.io en realtimeproducts.handlebars
 io.on('connection', (socket) => {
     console.log(`Cliente conectado: (${socket.id})`);//conexion de usuario
 
@@ -65,9 +66,9 @@ io.on('connection', (socket) => {
 
     socket.emit("server_confirm", "Conexión recibida");//confirmacion de conexion.
 
-    socket.on("producto", (data) => {//Agregar producto.
-        console.log(data)
-        managerDB.addProduct(data);
+    socket.on("producto", async (data) => {//Agregar producto.
+        let product = await productModel.create(data)
+        console.log(product)
     });
 
     socket.on("id", (data) => {//Eliminar producto por id.

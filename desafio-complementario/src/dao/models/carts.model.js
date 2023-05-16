@@ -5,7 +5,21 @@ const collection = "carts";
 
 const cartSchema = new mongoose.Schema({
     id: Number,
-    products: { type: Array, required: true }
+    products: {
+        type: [
+                {
+                    product: {
+                            type: mongoose.Schema.Types.ObjectId,
+                            ref: "products"
+                            },
+                    quantity: {
+                            type: Number,
+                            require: true
+                    }
+                }
+              ],
+        default: [],
+    }
 })
 
 const cartModel = mongoose.model(collection, cartSchema);

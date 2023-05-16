@@ -1,4 +1,5 @@
 import cartModel from "../models/carts.model.js";
+import mongoose from 'mongoose';
 
 class CartsClassDB {
     constructor() {
@@ -16,7 +17,7 @@ class CartsClassDB {
 
     getCartById = async(id) => {
         try {
-            return await cartModel.findById(id);
+            return await cartModel.findById({ '_id': new mongoose.Types.ObjectId(id) });
         }catch(err) {
             console.log(err)
         }
@@ -35,18 +36,26 @@ class CartsClassDB {
 
     addProductToCart = async(cartId, productId) => {
         try {
-            await this.getCarts();
-            const cart = this.carts.find((cart) => cart.id === cartId); //busco en array de carts si existe el id pasado.
-            const productRepeat = cart.products.findIndex((prod) => prod.product === productId);//verificar si el producto se encuntra repetido.
+            let cart = await cartModel.findOne({ '_id': new mongoose.Types.ObjectId(cartId) });
+            let productsInCart = cart.products;
+            let index = productsInCart.findIndex((p) => p.product._id == productId );
+            let obj = productsInCart[index]
 
-            if(productRepeat < 0) {
-                cart.products.push({ product: productId, quantity: 1 }); //si no está repetido, agrego el producto al array de productos.
+            if(index >= 0) {
+                obj.quantity++
+                productsInCart[index] = obj
+                let result = await cartModel.findByIdAndUpdate({ '_id': new mongoose.Types.ObjectId(cartId) }, { products: productsInCart });
+                return result;
+
             } else {
-                cart.products[productRepeat].quantity++; //si el producto está repetido, incremento la cantidad.
+                let newObj = {
+                    product: productId,
+                    quantity: 1
+                };
+                
+                let result = await cartModel.findByIdAndUpdate({ '_id': new mongoose.Types.ObjectId(cartId) }, {$push:{"products":newObj}});
+                return result;
             }
-            
-            await cartModel.create(this.carts) //actualizo el array de carts.
-            return "Producto añadido al carrito";
         } catch(err) {
             return err;
         }

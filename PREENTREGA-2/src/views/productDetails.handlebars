@@ -1,0 +1,19 @@
+<div class="container-fluid">
+    <div class="row">
+        <header class="bg-success p-3">
+            <h1>PRODUCTOS</h1>
+        </header> 
+    </div>
+
+    <div class="row">
+        {{#with product}}
+            <p><b>ID: </b>{{_id}}</p>
+            <p><b>NOMBRE: </b>{{title}}</p>
+            <p><b>DESCRIPCION: </b>{{description}}</p>
+            <p><b>CODIGO: </b>{{code}}</p>
+            <p><b>PRECIO: </b>{{price}}</p>
+            <p><b>STOCK: </b>{{stock}}</p>
+            <p><b>CATEGORIA: </b>{{category}}</p>
+        {{/with}}
+    </div>
+</div>

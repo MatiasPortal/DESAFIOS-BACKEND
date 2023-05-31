@@ -1,4 +1,5 @@
 import bcrypt from "bcrypt";
+import { createHash } from "../../utils.js";
 import mongoose from "mongoose";
 import userModel from "../models/users.model.js";
 
@@ -19,9 +20,6 @@ class UsersDB {
         return Object.keys(obj).length === 0;
     }
 
-    generarCrypto = (password) => {
-        return bcrypt.hashSync(password, 10);
-    }
 
     // Mostrar mensaje de estado.
     showStatusMsg = () => {
@@ -32,7 +30,7 @@ class UsersDB {
     addUser = async (user) => {
         try {
             if(!UsersDB.#objEmpty(user) && UsersDB.#verifyRequiredFields(user)) {
-                user.password = UsersDB.generarCrypto(user.password);
+                user.password = createHash(user.password);
                 const create = await userModel.create(user);
                 create.acknowledged === true ? this.statusMsg = "Usuario creado con exito" : this.statusMsg = "No se pudo crear el usuario";
             }

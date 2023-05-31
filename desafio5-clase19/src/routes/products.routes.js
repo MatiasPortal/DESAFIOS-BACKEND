@@ -1,13 +1,16 @@
 import  ProductsDB from "../dao/managerDB/products.dbclass.js";
 import { Router } from "express";
 import productModel from "../dao/models/products.model.js";
+import { validateAdmin } from "../middlewares/validate.middleware.js";
 
 const routerProducts = Router();
 
 const managerDB = new ProductsDB();
 
+
+
 //GET - Obtener productos.
-routerProducts.get("/products", async (req, res) => {
+routerProducts.get("/products", validateAdmin, async (req, res) => {
     const {limit, page, sort, category, status} = req.query;
 
     try {
@@ -22,7 +25,7 @@ routerProducts.get("/products", async (req, res) => {
 
 
 //GET - Obtener producto por ID.
-routerProducts.get("/products/:pid", async (req, res) => {
+routerProducts.get("/products/:pid", validateAdmin, async (req, res) => {
     try {
         const pid = req.params.pid;
         const product = await managerDB.getProductById(pid);
@@ -35,7 +38,7 @@ routerProducts.get("/products/:pid", async (req, res) => {
 
 
 //POST - Agregar producto.
-routerProducts.post("/products", async (req, res) => {
+routerProducts.post("/products", validateAdmin, async (req, res) => {
     try {
         let product = await req.body;
         const data = await managerDB.addProduct(product);
@@ -51,7 +54,7 @@ routerProducts.post("/products", async (req, res) => {
 
 
 //PUT - Update de producto.
-routerProducts.put("/products/:pid", async (req, res) => {
+routerProducts.put("/products/:pid", validateAdmin, async (req, res) => {
     try{
         let product = await managerDB.updateProduct(req.params.pid, req.body);
         res.status(200).send({ status: "success", product })
@@ -63,7 +66,7 @@ routerProducts.put("/products/:pid", async (req, res) => {
 
 
 //DELETE - Eliminar producto.
-routerProducts.delete("/products/:pid", async (req, res) => {
+routerProducts.delete("/products/:pid", validateAdmin, async (req, res) => {
     try {
         const pid = req.params.pid;
         await managerDB.deleteProduct(pid);

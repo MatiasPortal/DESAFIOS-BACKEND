@@ -42,7 +42,7 @@ servidor.use(express.json())
 servidor.use(express.urlencoded({ extended: true }));
 
 // Gestión de sesiones
-const store = MongoStore.create({ mongoUrl: MONGOOSE_URL_ATLAS, mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true  } });
+const store = MongoStore.create({ mongoUrl: MONGOOSE_URL_ATLAS, mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true  }, ttl: 3600 });
 
 servidor.use(session({
     store: store,
@@ -50,7 +50,6 @@ servidor.use(session({
     resave: false,
     saveUninitialized: false,
 }))
-
 
 // endpoints
 servidor.use("/api", routerProducts);

@@ -1,3 +1,5 @@
+import { validate, validateAdmin } from "../middlewares/validate.middleware.js";
+
 import CartsClassDB from "../dao/managerDB/carts.dbclass.js";
 import ProductsDB from "../dao/managerDB/products.dbclass.js";
 import { Router } from "express";
@@ -9,23 +11,7 @@ const routerViews = Router();
 const productManager = new ProductsDB()
 const cartManager = new CartsClassDB()
 
-//VALIDAR SI USUARIO ESTA LOGUEADO
-const validate = async (req, res, next) => {
-    if (req.session.userValidated) {
-        next()
-    } else {
-        res.status(401).json("No autorizado");
-    }
-}
 
-//VALIDACION DE ADMIN
-const validateAdmin = async (req, res, next) => {
-    if (req.session.user.role==="admin") {
-        next()
-    } else {
-        res.status(401).json("No autorizado");
-    }
-}
 
 //DETALLE DE PRODUCTO
 routerViews.get("/products/:pid", validate, async (req, res) => {
@@ -62,7 +48,7 @@ routerViews.get("/register", async (req, res) => {
     if(req.session.userValidated === true ) {
         res.redirect("/")
     } else {
-        res.render("register")
+        res.render("register", { errorMessages: req.session.errorMessages })
     }
 });
 

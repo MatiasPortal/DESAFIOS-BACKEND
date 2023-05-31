@@ -1,3 +1,5 @@
+import { createHash, validPassword } from "../utils.js";
+
 import ProductsDB from "../dao/managerDB/products.dbclass.js";
 import { Router } from "express"
 import UsersDB from "../dao/managerDB/users.dbclass.js";
@@ -18,7 +20,7 @@ const loginRoutes = (store, EMAIL_ADMIN, PASS_ADMIN) => {
             if (err) console.log(`Error al obtener el usuario: ${err}`)
 
             //si la validacion de usuario es true se renderiza la vista de productos.
-            if (data !== null && (req.session.userValidated || req.sessionStore.userValidated)) {      
+            if (data !== null && (req.session.userValidated)) {      
                   
                 let limit = parseInt(req.query.limit) || 10;
                 let category = req.query.category || "";
@@ -32,7 +34,7 @@ const loginRoutes = (store, EMAIL_ADMIN, PASS_ADMIN) => {
                 const user = req.session.user;
 
                 res.status(200).render("home", { products: products, user: user })
-                console.log(user)
+
 
             } else {
                 //si la validacion de usuario es false se renderiza la vista de login.
@@ -43,7 +45,7 @@ const loginRoutes = (store, EMAIL_ADMIN, PASS_ADMIN) => {
 
     //cerrar sesion.
     routes.get("/logout", (req, res) => {
-        req.session.userValidated = req.sessionStore.userValidated = false;
+        req.session.userValidated = false;
 
         req.session.destroy((err) => {
             req.sessionStore.destroy(req.sessionID, (err) => {
@@ -62,10 +64,8 @@ const loginRoutes = (store, EMAIL_ADMIN, PASS_ADMIN) => {
 
         if (user) {
             //Validar usuario
-            const validPassword = await bcrypt.compare(password, user.password);
-
-            if (validPassword) {
-                req.session.userValidated = req.sessionStore.userValidated = true;
+            if (validPassword(password, user)) {
+                req.session.userValidated = true;
                 req.session.user = {
                     firstName: user.firstName,
                     lastName: user.lastName,
@@ -75,22 +75,23 @@ const loginRoutes = (store, EMAIL_ADMIN, PASS_ADMIN) => {
                     id: user._id
                 }
             } else {
-                req.session.userValidated = req.sessionStore.userValidated = false;
-                req.session.errorMessages = req.sessionStore.errorMessages = "El usuario o contraseña son incorrectos";
+                req.session.userValidated = false;
+                req.session.errorMessages = "El usuario o contraseña son incorrectos";
             }
+            res.redirect("/");   
         }
         
         //LOGIN DE ADMIN.
         if(email === EMAIL_ADMIN && password === PASS_ADMIN) {
-            req.session.userValidated = req.sessionStore.userValidated = true;
+            req.session.userValidated = true;
             req.session.user = {
                 firstName: "Admin",
                 lastName: "Coder",
                 email: EMAIL_ADMIN,
                 role: "admin"
             }
-        }
-        res.redirect("/");     
+            res.redirect("/"); 
+        }  
     })
 
     //registrar usuario.
@@ -100,7 +101,7 @@ const loginRoutes = (store, EMAIL_ADMIN, PASS_ADMIN) => {
 
         try {
             if(exist) {
-                return res.status(400).send("El usuario ya existe")
+                return res.status(400).send("El email esta en uso.")
             }
             
             const user = {
@@ -108,7 +109,7 @@ const loginRoutes = (store, EMAIL_ADMIN, PASS_ADMIN) => {
                 lastName,
                 email,
                 age,
-                password: users.generarCrypto(password)
+                password: createHash(password),
             };
 
             const data = await userModel.create(user);

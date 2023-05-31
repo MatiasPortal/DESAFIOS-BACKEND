@@ -1,6 +1,7 @@
 import  CartsClassDB  from "../dao/managerDB/carts.dbclass.js";
 import  ProductsDB from "../dao/managerDB/products.dbclass.js";
 import { Router } from "express";
+import { validateAdmin } from "../middlewares/validate.middleware.js";
 
 const routerCart = Router();
 
@@ -9,7 +10,7 @@ const managerProducts = new ProductsDB();
 
 
 //POST - Crear carrito.
-routerCart.post("/carts", async(req, res) => {
+routerCart.post("/carts", validateAdmin, async(req, res) => {
     try {
         const data = await manager.addCart();
         res.status(200).send({ status:  "ok",  message: `Carrito creado`, data  });
@@ -20,7 +21,7 @@ routerCart.post("/carts", async(req, res) => {
 });
 
 // GET - Listar todos los carritos.
-routerCart.get("/carts", async(req, res) => {
+routerCart.get("/carts", validateAdmin, async(req, res) => {
     try {
         const carts = await manager.getCarts()
         res.status(200).send({ status: "ok", carts })
@@ -30,7 +31,7 @@ routerCart.get("/carts", async(req, res) => {
 })
 
 //POST - Agregar producto al carrito.
-routerCart.post("/carts/:cid/product/:pid", async(req, res) => {
+routerCart.post("/carts/:cid/product/:pid", validateAdmin,  async(req, res) => {
     try {
         const { cid, pid } = req.params;
   
@@ -43,7 +44,7 @@ routerCart.post("/carts/:cid/product/:pid", async(req, res) => {
 });  
 
 //DELETE - Borrar carrito.
-routerCart.delete("/cartdelete/:cid", async(req, res) => {
+routerCart.delete("/cartdelete/:cid", validateAdmin,  async(req, res) => {
     const { cid } = req.params;
 
     try {
@@ -56,7 +57,7 @@ routerCart.delete("/cartdelete/:cid", async(req, res) => {
 });
 
 //DELETE - Borrar producto del carrito.
-routerCart.delete("/carts/:cid/product/:pid", async(req, res) => {
+routerCart.delete("/carts/:cid/product/:pid", validateAdmin, async(req, res) => {
     const { cid, pid } = req.params;
 
     try {
@@ -70,7 +71,7 @@ routerCart.delete("/carts/:cid/product/:pid", async(req, res) => {
 });
 
 //PUT - actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body.
-routerCart.put("/carts/:cid/product/:pid", async(req, res) => {
+routerCart.put("/carts/:cid/product/:pid", validateAdmin, async(req, res) => {
     const { cid, pid } = req.params;
     const { quantity } = req.body;
 
@@ -84,7 +85,7 @@ routerCart.put("/carts/:cid/product/:pid", async(req, res) => {
 });
 
 //DELETE - Borrar todos los productos del carrito.
-routerCart.delete("/carts/:cid", async(req, res) => {
+routerCart.delete("/carts/:cid", validateAdmin, async(req, res) => {
     const { cid } = req.params;
 
     try{
@@ -97,7 +98,7 @@ routerCart.delete("/carts/:cid", async(req, res) => {
 });
 
 //GET - Obtener un carrito por id.
-routerCart.get("/carts/:cid", async(req, res) => {
+routerCart.get("/carts/:cid", validateAdmin, async(req, res) => {
     const { cid } = req.params;
 
     try {

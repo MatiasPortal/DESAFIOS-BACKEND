@@ -152,10 +152,6 @@ const routerViews = (store, EMAIL_ADMIN, PASS_ADMIN) => {
         }  
     });
 
-    
-    router.get("/current", authToken, (req, res) => {
-        res.send({ status: "success", payload: req.user })
-    });
 
     //error al registrar.
     router.get("/failedRegister", (req, res) => {

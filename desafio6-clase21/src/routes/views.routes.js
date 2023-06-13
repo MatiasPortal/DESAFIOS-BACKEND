@@ -133,7 +133,7 @@ const routerViews = (store, EMAIL_ADMIN, PASS_ADMIN) => {
         };
 
         //GENERAR TOKEN
-        const accessToken = generateToken(req.user);
+        const accessToken = generateToken(req.session.user);
         console.log(accessToken)
         res.cookie("accessToken", accessToken, { httpOnly: true });
         

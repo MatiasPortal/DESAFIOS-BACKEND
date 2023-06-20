@@ -1,8 +1,7 @@
-
 const buttonAdd = async(obj) => {
     const pid = obj.getAttribute("pid");
     console.log(pid);
-    const URL = `/api/carts/6467ef65e36657ed6111e4fd/product/${pid}`;
+    const URL = `/api/carts/${cart._id}/product/${pid}`;
     const res = await fetch(URL, {
         method: "POST",
         headers: {

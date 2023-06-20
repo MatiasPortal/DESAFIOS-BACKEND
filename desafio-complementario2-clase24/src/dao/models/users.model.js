@@ -8,8 +8,8 @@ const schema = new mongoose.Schema({
     email: { type: String, trim: true },
     age: { type: Number },
     password: { type: String },
-    carts: { 
-        type: [ mongoose.Schema.Types.ObjectId ],
+    cart: { 
+        type: mongoose.Schema.Types.ObjectId,
         ref: "carts"
     },
     role: { type: String, trim: true, default: "user", enum: ["user", "admin"] }

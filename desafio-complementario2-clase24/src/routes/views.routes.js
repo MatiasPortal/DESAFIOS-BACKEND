@@ -126,7 +126,7 @@ const routerViews = (store) => {
             age: req.user.age,
             role: req.user.role,
             id: req.user._id,
-            cart: req.user.carts
+            cart: req.user.cart
         };
 
         //GENERAR TOKEN

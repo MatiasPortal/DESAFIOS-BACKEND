@@ -2,7 +2,7 @@
     <div class="row">
         <nav class="bg-success p-3 navbar">
             <h1>PRODUCTOS</h1>
-            <a href="/carts/6467ef65e36657ed6111e4fd" class="p-3"><img src="../public/assets/cart-round-1170-svgrepo-com.svg" alt="cart" width="40"></a>
+            <a href="/carts/{{user.cart._id}}" class="p-3"><img src="../public/assets/cart-round-1170-svgrepo-com.svg" alt="cart" width="40"></a>
         </nav> 
     </div>
     <div class="row">
@@ -24,7 +24,7 @@
                         <p class="card-text"><b>Precio: </b> ${{this.price}}</p>
                         <p class="card-text"><b>Descripción: </b> {{this.description}}</p>
                         <a class="btn btn-info my-3" href="/products/{{this._id}}">DETALLE</a>
-                        <button type="button" class="btn btn-info" onclick="buttonAdd(this)" pid="{{this._id}}">AÑADIR A CARRITO</button>
+                        <button type="button" class="btn btn-info button-add-cart" onclick="buttonAdd()" pid="{{this._id}}">AÑADIR A CARRITO</button>
                     </div>
                 </div>
             </div>

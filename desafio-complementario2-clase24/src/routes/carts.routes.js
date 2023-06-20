@@ -1,7 +1,8 @@
+import { validate, validateAdmin } from "../middlewares/validate.middleware.js";
+
 import  CartsClassDB  from "../dao/managerDB/carts.dbclass.js";
 import  ProductsDB from "../dao/managerDB/products.dbclass.js";
 import { Router } from "express";
-import { validateAdmin } from "../middlewares/validate.middleware.js";
 
 const routerCart = Router();
 
@@ -31,7 +32,7 @@ routerCart.get("/carts", validateAdmin, async(req, res) => {
 })
 
 //POST - Agregar producto al carrito.
-routerCart.post("/carts/:cid/product/:pid", validateAdmin,  async(req, res) => {
+routerCart.post("/carts/:cid/product/:pid", validate,  async(req, res) => {
     try {
         const { cid, pid } = req.params;
   
@@ -57,7 +58,7 @@ routerCart.delete("/cartdelete/:cid", validateAdmin,  async(req, res) => {
 });
 
 //DELETE - Borrar producto del carrito.
-routerCart.delete("/carts/:cid/product/:pid", validateAdmin, async(req, res) => {
+routerCart.delete("/carts/:cid/product/:pid", validate, async(req, res) => {
     const { cid, pid } = req.params;
 
     try {
@@ -71,7 +72,7 @@ routerCart.delete("/carts/:cid/product/:pid", validateAdmin, async(req, res) => 
 });
 
 //PUT - actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body.
-routerCart.put("/carts/:cid/product/:pid", validateAdmin, async(req, res) => {
+routerCart.put("/carts/:cid/product/:pid", validate, async(req, res) => {
     const { cid, pid } = req.params;
     const { quantity } = req.body;
 
@@ -85,7 +86,7 @@ routerCart.put("/carts/:cid/product/:pid", validateAdmin, async(req, res) => {
 });
 
 //DELETE - Borrar todos los productos del carrito.
-routerCart.delete("/carts/:cid", validateAdmin, async(req, res) => {
+routerCart.delete("/carts/:cid", validate, async(req, res) => {
     const { cid } = req.params;
 
     try{
@@ -98,7 +99,7 @@ routerCart.delete("/carts/:cid", validateAdmin, async(req, res) => {
 });
 
 //GET - Obtener un carrito por id.
-routerCart.get("/carts/:cid", validateAdmin, async(req, res) => {
+routerCart.get("/carts/:cid", validate, async(req, res) => {
     const { cid } = req.params;
 
     try {

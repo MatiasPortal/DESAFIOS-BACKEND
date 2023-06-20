@@ -3,6 +3,7 @@ import * as dotenv from 'dotenv'
 import { createHash, generateToken, validPassword } from "../utils.js"
 
 import { Strategy as GithubStrategy } from 'passport-github2';
+import cartModel from '../dao/models/carts.model.js'
 import local from 'passport-local';
 import passport from 'passport';
 import userModel from '../dao/models/users.model.js';
@@ -36,6 +37,13 @@ const initializePassport = () => {
 
                 const createdUser = await userModel.create(newUser);
 
+                // carrito.
+                const newCart = await cartModel.create({});
+
+                // Vincular cart a user.
+                createdUser.cart = newCart._id;
+                await createdUser.save();
+
                 const token = generateToken(createdUser);
                 
                 return done(null, createdUser);
@@ -52,7 +60,7 @@ const initializePassport = () => {
      async(req, email, password, done) => {
 
         try {
-            const user = await userModel.findOne({ email }).populate("carts");
+            const user = await userModel.findOne({ email }).populate("cart");
 
             if(!user) {
                 req.session.errorMessages = "Usuario no encontrado"

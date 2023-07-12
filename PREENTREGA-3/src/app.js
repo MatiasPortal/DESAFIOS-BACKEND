@@ -1,3 +1,4 @@
+import MongoSingleton from "./configs/mongoSingleton.js";
 import ProductsDB from "./dao/services/products.dbclass.js"
 import { Server } from "socket.io";
 import { __dirname } from "./configs/utils.js";
@@ -87,7 +88,7 @@ io.on('connection', (socket) => {
 
 // Conexión del servidor.
 try {
-    await mongoose.connect(config.MONGOOSE_URL_ATLAS);
+    await MongoSingleton.getInstance();
 
     servidor.listen(config.PUERTO, () => {
         console.log(`Servidor iniciado en puerto: ${config.PUERTO}`);

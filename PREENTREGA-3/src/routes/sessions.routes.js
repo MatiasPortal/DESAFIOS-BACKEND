@@ -21,10 +21,13 @@ const sessionRoutes = () => {
 
     //CURRENT. Datos de usuario
     routes.get("/current", (req, res) => {
-        let { firstName, lastName, email, age, cart } = req.session.user;
-        const user = { firstName, lastName, email, age, cart }
-        res.send({ status: "ok", payload: user });
-});
+        try {
+            let user = new GetUserDto(req.user);
+            res.json({ payload: user });
+        } catch(err) {
+            res.status(500).json({error: err});
+        }
+    });
     
     return routes;
 }

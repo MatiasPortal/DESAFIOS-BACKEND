@@ -74,7 +74,7 @@ cartCheckOut.addEventListener('click', async () => {
         const response = await fetch('/api/sessions/current');
         const data = await response.json();
         const cartId = data.payload.cart._id
-        console.log(cartId);
+        console.log("CART ID: ", cartId);
 
         const purchaseResp = await fetch(`/api/carts/${cartId}/purchase`);
         const purchaseData = await purchaseResp.json();

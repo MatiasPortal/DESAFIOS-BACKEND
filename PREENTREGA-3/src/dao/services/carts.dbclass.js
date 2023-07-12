@@ -132,8 +132,8 @@ class CartsClassDB {
             }
     
             //generar array de productos y de productos rechazados.
-            let ticketProducts = [];
-            const rejectedProducts = [];
+            let purchableProducts = [];
+            let noPurchableProducts  = [];
             //precio total.
             let totalPrice = 0;
     
@@ -145,32 +145,32 @@ class CartsClassDB {
     
                 //obtener producto.
                 const productData = await productDB.getProductById(product._id);
-                console.log("Producto por id:", productData, "Cantidad en carrito:", quantity)
     
-                //Si hay stock del producto, agregar lo solicitado a ticketProducts.
-                if(productData.stock >= quantity) {
-                    ticketProducts.push({
+                //Si hay stock del producto, agregar lo solicitado a purchableProducts.
+                if(productData.stock >= 0) {
+                    const quantityToPurchase = Math.min(productData.stock, quantity);
+                    
+                    purchableProducts.push({
                         _id: product._id,
                         name: product.title,
                         price: product.price,
-                        quantity
+                        quantity: quantityToPurchase
                     });
     
                     //obtener precio total.
-                    totalPrice += productData.price * quantity;
+                    totalPrice += productData.price * quantityToPurchase;
     
-                    //actualizar carrito y stock.
-                    await this.deleteProductInCart(cid, product._id);
-
-                    await productDB.updateProduct(product._id, { stock: productData.stock - quantity });
+                    //actualizar stock.
+                    await productDB.updateProduct(product._id, { stock: productData.stock - quantityToPurchase });
         
-                } else {
-                    // productos que no se pudieron comprar.
-                    rejectedProducts.push({
+                } 
+
+                if (productData.stock < quantity) {
+                    noPurchableProducts.push({
                         _id: product._id,
                         name: product.title,
                         price: product.price,
-                        quantity
+                        quantity: quantity - productData.stock
                     });
                 }
             }
@@ -181,13 +181,12 @@ class CartsClassDB {
                 code: Math.floor(Math.random() * (999999 - 100000) + 100000),
                 amount: totalPrice,
                 purchaser: userEmail,
-                products: ticketProducts
+                products: purchableProducts
             };
    
             const ticket = new TicketClassDB();
             const createTicket = await ticket.createTicket(newTicket);
 
-            const hasRejectedProducts = rejectedProducts.length > 0;
     
             //GENERAR MAIL DE COMPRA.
             if(createTicket) {
@@ -208,19 +207,10 @@ class CartsClassDB {
                 } catch(err) {
                     console.log(err);
                 }
-
-                //actualizar carrito si sobraron productos sin stock
-                if (hasRejectedProducts) {
-                    const updateCart = await this.updateCartProducts(cid, rejectedProducts);
-                    if(!updateCart) {
-                        throw new Error("Error al actualizar carrito");
-                    }
-                }
-
-                await this.deleteAllProducts(cid);
     
-                return { ticket: newTicket, rejectedProducts };
-                
+                //devolver ticket y productos rechazados.
+                return { ticket: newTicket, rejectedProducts: noPurchableProducts };
+                     
             } else {
                 throw new Error("Error al crear el ticket");
             }

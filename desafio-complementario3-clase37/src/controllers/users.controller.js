@@ -8,11 +8,8 @@ const user = new UsersDB();
 export const changeRol = async (req, res, next) => {
     try {
         const userId = req.params.uid;
-        const updateRol = await user.changeRol(userId);
-
-        if (!updateRol) {
-            throw new CustomError(errorsDict.VALIDATION_ERROR);
-        }
+        console.log("user id: ", userId)
+        await user.changeRol(userId);
 
         res.send({ status: "success", message: "Rol actualizado" })
     } catch(err) {

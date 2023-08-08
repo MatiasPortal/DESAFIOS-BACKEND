@@ -12,7 +12,7 @@ const schema = new mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         ref: "carts"
     },
-    role: { type: String, trim: true, default: "user", enum: ["user", "admin", "premium"] }
+    role: { type: String, trim: true, default: "user", enum: ["user", "admin", "premium"]  }
 });
 
 const userModel = mongoose.model(collection, schema);

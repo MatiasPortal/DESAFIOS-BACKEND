@@ -91,18 +91,17 @@ class UsersDB {
     // Cambiar rol de usuario.
     changeRol = async(id) => {
         try {
-            const user = await userModel.findById(id);
-            const userRole = user.role;
+            const user = await userModel.findById(id).lean()
+            console.log(user)
 
-            if(userRole === "user") {
-                user.role = "premium";
-            } else if(userRole === "premium") {
-                user.role = "user";
-            } else {
-                this.statusMsg = "No se pudo cambiar el rol del usuario";
+            if(!user) {
+                throw new Error("No se encontrón el usuario");
             }
 
-            await userModel.updateOne({ _id: user._id }, user);
+            const newRole = user.role === "user" ? "premium" : "user";
+            console.log("Nuevo rol: ", newRole)
+
+            await userModel.findByIdAndUpdate({ "_id": new mongoose.Types.ObjectId(id) }, { "role": newRole });
         } catch(err) {
             this.statusMsg = `changeRol: ${err.message}`;
         }

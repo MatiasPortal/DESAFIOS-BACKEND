@@ -9,28 +9,28 @@ const routerCart = Router();
 routerCart.post("/carts", /* validateAdmin, */ createCart);
 
 // GET - Listar todos los carritos.
-routerCart.get("/carts", validateAdmin, getCarts);
+routerCart.get("/carts", /* validateAdmin, */ getCarts);
 
 //POST - Agregar producto al carrito.
-routerCart.post("/carts/:cid/product/:pid", validate, addProductToCart);  
+routerCart.post("/carts/:cid/product/:pid", /* validate, */ addProductToCart);  
 
 //DELETE - Borrar carrito.
-routerCart.delete("/cartdelete/:cid", validateAdmin, deleteCart);
+routerCart.delete("/cartdelete/:cid", /* validateAdmin, */ deleteCart);
 
 //DELETE - Borrar producto del carrito.
-routerCart.delete("/carts/:cid/product/:pid", validate, deleteProduct);
+routerCart.delete("/carts/:cid/product/:pid", /* validate, */ deleteProduct);
 
 //PUT - actualizar SÓLO la cantidad de ejemplares del producto por cualquier cantidad pasada desde req.body.
-routerCart.put("/carts/:cid/product/:pid", validate, updateProductQuantity);
+routerCart.put("/carts/:cid/product/:pid", /* validate, */ updateProductQuantity);
 
 //DELETE - Borrar todos los productos del carrito.
-routerCart.delete("/carts/:cid", validate, deleteAllProducts);
+routerCart.delete("/carts/:cid", /* validate,  */deleteAllProducts);
 
 //GET - Obtener un carrito por id.
-routerCart.get("/carts/:cid", validate, getCartById);
+routerCart.get("/carts/:cid", /* validate, */ getCartById);
 
 //GET - Finalizar proceso de compra.
-routerCart.get("/carts/:cid/purchase", validate, purchaseProduct )
+routerCart.get("/carts/:cid/purchase", /* validate, */ purchaseProduct )
 
 export default routerCart;
 

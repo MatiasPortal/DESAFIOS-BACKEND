@@ -93,3 +93,134 @@
 {"level":"error","message":"products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\", title: Path `title` is required."}
 {"level":"error","message":"products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\""}
 {"level":"error","message":"products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\", title: Path `title` is required."}
+{"level":"error","message":"products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\""}
+{"level":"error","message":"products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\", title: Path `title` is required."}
+{"level":"error","message":"products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\""}
+{"level":"error","message":"products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\", title: Path `title` is required."}
+{"level":"error","message":"products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\""}
+{"level":"error","message":"products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\", title: Path `title` is required."}
+{"level":"error","message":"products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\""}
+{"level":"error","message":"products validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\", title: Path `title` is required."}
+{"level":"error","message":"products-test validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\""}
+{"level":"error","message":"products-test validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\", title: Path `title` is required."}
+{"level":"error","message":"products-test validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\""}
+{"level":"error","message":"products-test validation failed: owner: Cast to ObjectId failed for value \"admin\" (type string) at path \"owner\" because of \"BSONError\", title: Path `title` is required."}
+{"level":"error","message":"products-test validation failed: title: Path `title` is required."}
+{"level":"error","message":"products-test validation failed: title: Path `title` is required."}
+{"level":"error","message":"products-test validation failed: title: Path `title` is required."}
+{"level":"error","message":"products-test validation failed: title: Path `title` is required."}
+{"level":"error","message":"products-test validation failed: title: Path `title` is required."}
+{"level":"error","message":"products-test validation failed: title: Path `title` is required."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"No se encontró los datos solicitados."}
+{"level":"error","message":"No se encontró los datos solicitados."}
+{"level":"error","message":"payload is not defined"}
+{"level":"error","message":"allProducts is not defined"}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"updateProd is not defined"}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Cannot read properties of undefined (reading '_id')"}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Cannot read properties of undefined (reading '_id')"}
+{"level":"error","message":"Cannot read properties of undefined (reading '_id')"}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Cannot read properties of undefined (reading '_id')"}
+{"level":"error","message":"No se encontró los datos solicitados."}
+{"level":"error","message":"Cannot read properties of undefined (reading '_id')"}
+{"level":"error","message":"Cannot read properties of undefined (reading '_id')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'id')"}
+{"level":"error","message":"No se encontró los datos solicitados."}
+{"level":"error","message":"No se encontró los datos solicitados."}
+{"level":"error","message":"No se encontró los datos solicitados."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Error en la validación de datos."}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"No se encontró los datos solicitados."}
+{"level":"error","message":"No se encontró los datos solicitados."}
+{"level":"error","message":"No se encontró los datos solicitados."}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"No se encontró los datos solicitados."}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}
+{"level":"error","message":"Cannot read properties of undefined (reading 'role')"}

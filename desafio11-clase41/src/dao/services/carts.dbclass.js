@@ -13,7 +13,7 @@ class CartsClassDB {
     // Obtener los carritos con populate.
     getCarts = async() => {
         try {
-            const data = await cartModel.find().lean().populate('products.product');
+            const data = await cartModel.find().lean()/* .populate('products.product'); */
 
             if(!data) {
                 throw new CustomError(errorsDict.DATABASE_ERROR);

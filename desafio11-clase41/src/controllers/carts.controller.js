@@ -44,7 +44,7 @@ export const addProductToCart = async(req, res, next) => {
     const { cid, pid } = req.params;
     const productToAdd = await product.getProductById(pid);
     const productOwner = productToAdd.owner.toString();
-    const userId = req.user.id.toString();
+    const userId = req.user._id.toString();
 
     // si el owner(premium) del producto quiere comprar su producto no va a poder.
     if(productOwner === userId) {

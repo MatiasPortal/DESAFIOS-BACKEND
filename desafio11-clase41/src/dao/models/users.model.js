@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 
-const collection = "users";
+/* const collection = "users"; */
+const collection = "users-test";
 
 const schema = new mongoose.Schema({
     firstName: { type: String, trim: true },

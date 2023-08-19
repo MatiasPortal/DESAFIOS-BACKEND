@@ -5,7 +5,8 @@
   "main": "app.js",
   "type": "module",
   "scripts": {
-    "test": "mocha src/test/Products.test.js --exit --recursive --timeout 15000"
+    "test:products": "mocha src/test/Products.test.js",
+    "test:carts": "mocha src/test/Carts.test.js"
   },
   "keywords": [],
   "author": "",
@@ -34,6 +35,7 @@
   "devDependencies": {
     "@faker-js/faker": "^8.0.2",
     "chai": "^4.3.7",
+    "mocha": "^10.2.0",
     "supertest": "^6.3.3"
   }
 }

@@ -1,7 +1,8 @@
 import mongoose from "mongoose";
 
 mongoose.pluralize(null);
-const collection = "carts";
+/* const collection = "carts"; */
+const collection = "carts-test";
 
 const schemaOptions = {
     versionKey: false

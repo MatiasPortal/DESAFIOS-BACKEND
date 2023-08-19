@@ -2,7 +2,8 @@ import mongoose from "mongoose";
 import mongoosePaginate from "mongoose-paginate-v2";
 
 mongoose.pluralize(null);
-const collection = "products"; 
+/* const collection = "products";  */
+const collection = "products-test"; 
 
 const productSchema = new mongoose.Schema({
     title: { type: String, required: true, index: true },
@@ -12,7 +13,7 @@ const productSchema = new mongoose.Schema({
     status: { type: Boolean, default: true },
     stock: { type: Number, required: true },
     category: { type: String, required: true, index: true },
-    owner: { type: mongoose.Schema.Types.ObjectId, ref: "users", default: "admin" },
+    owner: { type: String, ref: "users", default: "admin" },
     thumbnail: Array
 })
 

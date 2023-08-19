@@ -12,11 +12,13 @@ export const getProducts = async (req, res, next) => {
     try {
         let products = await product.getProducts(limit, page, sort, category, status);
 
+        const allProducts = products.payload;
+
         if(!products) {
             throw new CustomError(errorsDict.VALIDATION_ERROR);
         }
 
-        res.status(200).send({ status: "success", products });
+        res.status(200).send({ status: "success", allProducts });
     
     } catch(err) {
         next(err);
@@ -29,15 +31,12 @@ export const addProducts = async (req, res, next) => {
          const { title, description, code, price, stock, category } = req.body;
          const productToAdd = { title, description, code, price, stock, category }
 
-         if(!productToAdd) {
-            throw new CustomError(errorsDict.VALIDATION_ERROR);
+         if(!title || !description || !code || !price || !stock || !category) {
+             throw new CustomError(errorsDict.VALIDATION_ERROR);
          }
          
         const data = await product.addProduct(productToAdd);
 
-        if(!data) {
-            throw new CustomError(errorsDict.VALIDATION_ERROR);
-        }
 
         if(data.status === "error") {
             return res.status(404).send({ data });
@@ -67,7 +66,7 @@ export const getById = async (req, res, next) => {
 };
 
 // Update de producto.
-export const updateProduct = async (req, res, next) => {
+export const updatedProduct = async (req, res, next) => {
     try{
         let data = await product.updateProduct(req.params.pid, req.body);
 
@@ -75,7 +74,7 @@ export const updateProduct = async (req, res, next) => {
             throw new CustomError(errorsDict.VALIDATION_ERROR);
         }
 
-        res.status(200).send({ status: "success", data })
+        return res.status(200).send({ status: "success", message: "Producto actualizado", data })
     } catch(err) {
         next(err);
     }
@@ -90,14 +89,14 @@ export const deleteProduct = async (req, res, next) => {
         if(productToDelete) {
             const productOwner = JSON.parse(JSON.stringify(productToDelete.owner));
             console.log(productOwner);
-            const userId = req.user.id;
+            const userId = req.user._id;
             console.log(userId);
 
             if ((req.user.role === "premium" && productOwner === userId) || req.user.role === "admin") {
                 await product.deleteProduct(pid);
                 return res.status(200).send("Producto eliminado");
             } else {
-                res.status(403).send("No se pudo borrar este producto.");
+                res.status(403).send("No se pudo borrar este producto, no es dueño del producto o admin.");
             }
         } else {
             return res.status(404).send(errorsDict.NOT_FOUND_ERROR);

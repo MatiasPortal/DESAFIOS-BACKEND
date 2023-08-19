@@ -62,7 +62,6 @@ class ProductsDB {
     addProduct = async (product) => {
         try {
             const newProduct = await productModel.create(product);
-            await newProduct.save();
             return newProduct;
         } catch (error) {
             throw error;
@@ -81,8 +80,7 @@ class ProductsDB {
     // update de producto por id.
     updateProduct = async(id, data) => {
         try {
-            return await productModel.findByIdAndUpdate({ '_id': new mongoose.Types.ObjectId(id)}, data);
-            
+            return await productModel.findByIdAndUpdate({ '_id': new mongoose.Types.ObjectId(id) }, data)
         } catch(err) {
             throw err;
         }
@@ -92,8 +90,7 @@ class ProductsDB {
     deleteProduct = async(id) => {
         try {
             const data = await productModel.deleteOne({ '_id': new mongoose.Types.ObjectId(id) });
-            if(data.deletedCount === 0) throw new Error("El id no existe")
-            return "Producto eliminado correctamente";
+            return data;
         } catch(err) {
             throw err;
         }

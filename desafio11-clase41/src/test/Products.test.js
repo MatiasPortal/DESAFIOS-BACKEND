@@ -18,73 +18,71 @@ describe('Testing products routes', () => {
         stock: 10,
         thumbnail: 'test thumbnail'
     };
-
+    
     before(async function () {
         try {
-            await mongoose.connect('mongodb://localhost:27017/test');
-            await mongoose.connection.dropCollection('products');
+            await mongoose.connect("mongodb+srv://user:user@cluster0.b5bhaje.mongodb.net/ecommerce");
+            await mongoose.connection.dropCollection('products-test');
         } catch(err) {
             console.error(err.message);
         }
     });
 
-    describe('Testing products', () => {
         it('POST - /api/products - Debe crear un producto', async function() {
             const { statusCode, ok, body } = await requester.post('/api/products').send(productTest);
 
             expect(statusCode).to.eql(200);
             expect(ok).to.eql(true);
             expect(body).to.be.an('object');
-
-            console.log(body)
         });
 
         it('POST - /api/products - campo vacío retornar error', async function() {
-            const data = { ...productTest, title: '' };
+            const data = { ...productTest, title: undefined };
             const { statusCode } = await requester.post('/api/products').send(data);
+
             expect(statusCode).to.eql(400);
         });
 
-        it('GET - /api/products - Debe retornar un array de productos', async function() {
+        it('GET - /api/products - Debe retornar array de productos', async function() {
             const { statusCode, ok, body } = await requester.get('/api/products');
 
             expect(statusCode).to.eql(200);
             expect(ok).to.eql(true);
-            expect(body).to.be.an('array');
+            expect(body.allProducts).to.be.an('array'); 
         });
 
         it('GET - /api/products/:pid - Retornar producto por id', async function() {
             const resp = await requester.get('/api/products');
-            const { statusCode, ok, body } = await requester.get(`/api/products/${resp.body[0]._id}`);
+            const { statusCode, ok, body } = await requester.get(`/api/products/${resp.body.allProducts[0]._id}`);
 
             expect(statusCode).to.eql(200);
             expect(ok).to.eql(true);
-
-            console.log(body)
+            expect(body.productId).to.be.an('object');
         });
 
         it('PUT - /api/products/:pid - Debe actualizar producto', async function() {
             const resp = await requester.get('/api/products');
-            const productUpdated = { ...productTest, title: 'test update' };
+            const currentProduct = resp.body.allProducts[0];
 
-            const { statusCode, ok, body } = await requester.put(`/api/products/${resp.body[0]._id}`).send(productUpdated);
+            const updatedProduct = { ...currentProduct, price: 2000 }
+
+            const { statusCode, ok, body } = await requester.put(`/api/products/${currentProduct._id}`).send(updatedProduct);
 
             expect(statusCode).to.eql(200);
             expect(ok).to.eql(true);
-            
-            console.log(body)
+            expect(body.data).to.be.an('object');
         });
 
-        it('DELETE - /api/products/:pid - Debe borrar producto', async function() {
+        // HABRIA QUE GENERAR UN USUARIO PARA PODER REALIZAR EL TEST.
+            /* it('DELETE - /api/products/:pid - No debe dejar borrar producto si no sos admin o dueño del producto.', async function() {
             const resp = await requester.get('/api/products');
-            const { statusCode, ok, body } = await requester.delete(`/api/products/${resp.body[0]._id}`);
+            console.log(resp.body.allProducts[0]._id)
+            const { statusCode, ok, body } = await requester.delete(`/api/products/${resp.body.allProducts[0]._id}`);
 
-            expect(statusCode).to.eql(200);
-            expect(ok).to.eql(true);
+            expect(statusCode).to.eql(403);
+            expect(ok).to.eql(true); 
 
-            console.log(body)
-        })
-    });
+        })  */
 
     after(async function () {
         try {

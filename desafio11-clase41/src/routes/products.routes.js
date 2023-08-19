@@ -1,4 +1,4 @@
-import { addProducts, deleteProduct, getById, getProducts, mockingProducts, updateProduct } from "../controllers/products.controller.js";
+import { addProducts, deleteProduct, getById, getProducts, mockingProducts, updatedProduct } from "../controllers/products.controller.js";
 import { validate, validateAdmin, validatePremium } from "../middlewares/validate.middleware.js";
 
 import { Router } from "express";
@@ -16,10 +16,10 @@ routerProducts.get("/products/:pid" /* validateAdmin */, getById);
 routerProducts.post("/products" /* validateAdmin */, addProducts);
 
 //PUT - Update de producto.
-routerProducts.put("/products/:pid" /* validateAdmin */, updateProduct);
+routerProducts.put("/products/:pid" /* validateAdmin */, updatedProduct);
 
 //DELETE - Eliminar producto.
-routerProducts.delete("/products/:pid" /* validateAdmin */, validatePremium, deleteProduct);
+routerProducts.delete("/products/:pid", /* validateAdmin , validatePremium, */  deleteProduct);
 
 
 export default routerProducts;

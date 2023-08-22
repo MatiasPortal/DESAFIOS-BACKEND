@@ -1,5 +1,6 @@
 import CustomError from "./dao/services/customErrors.js";
 import MongoSingleton from "./configs/mongoSingleton.js";
+import MongoStore from "connect-mongo";
 import ProductsDB from "./dao/services/products.dbclass.js"
 import { Server } from "socket.io";
 import { __dirname } from "./configs/utils.js";
@@ -21,9 +22,12 @@ import routerUser from "./routes/users.routes.js";
 import routerViews from "./routes/views.routes.js";
 import session from "express-session";
 import sessionRoutes from './routes/sessions.routes.js';
-import { store } from "./configs/utils.js";
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUiExpress from "swagger-ui-express";
+
+/* import { store } from "./configs/utils.js"; */
+
+
 
 const managerDB = new ProductsDB();
 
@@ -64,8 +68,11 @@ servidor.use(express.json())
 servidor.use(express.urlencoded({ extended: true }));
 
 // Gestión de sesiones
+
+export const storeSession = MongoStore.create({ mongoUrl: config.MONGOOSE_URL_ATLAS, mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true  }, ttl: 3600 });
+
 servidor.use(session({
-    store: store,
+    store: storeSession,
     secret: config.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
@@ -81,7 +88,7 @@ servidor.use("/api", routerProducts);
 servidor.use("/api", routerMocking)
 servidor.use("/api", routerCart);
 servidor.use("/api", routerUser)
-servidor.use("/", routerViews(store));
+servidor.use("/", routerViews(storeSession));
 servidor.use("/api/sessions", sessionRoutes());
 servidor.use("/api/loggerTest", loggerRouter);
 servidor.use("/api-docs", swaggerUiExpress.serve, swaggerUiExpress.setup(specs));

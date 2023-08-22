@@ -57,8 +57,7 @@ const verifyEmailToken = (token) => {
 }
 
 
-// GESTIÓN DE SESIONES
-const store = MongoStore.create({ mongoUrl: config.MONGOOSE_URL_ATLAS, mongoOptions: { useNewUrlParser: true, useUnifiedTopology: true  }, ttl: 3600 });
 
 
-export { __filename, __dirname, createHash, validPassword, generateToken, authToken, verifyEmailToken, store };
+
+export { __filename, __dirname, createHash, validPassword, generateToken, authToken, verifyEmailToken };

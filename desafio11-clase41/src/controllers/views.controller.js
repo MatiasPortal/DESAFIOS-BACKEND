@@ -2,7 +2,7 @@ import CartsClassDB from "../dao/services/carts.dbclass.js";
 import ProductsDB from "../dao/services/products.dbclass.js";
 import { generateToken } from "../configs/utils.js";
 import productModel from "../dao/models/products.model.js";
-import { store } from "../configs/utils.js";
+import { storeSession } from "../app.js";
 
 const products = new ProductsDB();
 const cartManager = new CartsClassDB();
@@ -53,7 +53,7 @@ export const profile = async (req, res) => {
 
 // Verificar los datos de sesion.
 export const verifySession = async (req, res) => {
-    store.get(req.sessionID, async (err, data) => {
+    storeSession.get(req.sessionID, async (err, data) => {
         //si hay un error
         if (err) console.log(`Error al obtener el usuario: ${err}`)
 

@@ -37,6 +37,15 @@ describe('Testing carts routes', () => {
             expect(body.data.products).to.be.an('array');
         });
 
+        it('GET - /api/carts - Debe listar todos los carritos', async function() {
+            const { statusCode, ok, body } = await requester.get('/api/carts')
+
+            console.log(body.carts)
+            expect(statusCode).to.eql(200);
+            expect(ok).to.eql(true);
+            expect(body).to.be.an('object');
+        });
+
         it('POST - /api/carts/:cid/product/:pid - Debe agregar producto al carrito', async function() {
             const product = await productModel.create(productTest);
             const productID = product._id;
@@ -57,14 +66,6 @@ describe('Testing carts routes', () => {
             expect(body.data.products).to.be.an('array'); */
         });
 
-        it('GET - /api/carts - Debe listar todos los carritos', async function() {
-            const { statusCode, ok, body } = await requester.get('/api/carts')
-
-            console.log(body.carts)
-            expect(statusCode).to.eql(200);
-            expect(ok).to.eql(true);
-            expect(body).to.be.an('object');
-        });
 
     after(async function () {
         try {

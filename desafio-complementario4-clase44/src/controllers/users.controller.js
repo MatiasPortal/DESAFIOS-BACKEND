@@ -94,7 +94,7 @@ export const updateUserDoc = async (req, res, next) => {
 
         const userUpdate = await userModel.findByIdAndUpdate(user._id, user, { new: true });
 
-        res.json({ status: "success", message: "Documentos actualizados" });
+        res.json({ status: "success", message: "Documentos actualizados", userUpdate });
     } catch(err) {
         next(err)
     }

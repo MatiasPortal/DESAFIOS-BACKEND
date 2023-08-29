@@ -7,7 +7,7 @@ import { docUpload } from "../middlewares/multerFiles.js";
 const routerUser = Router();
 
 //Cambio de rol de usuario.
-routerUser.put("/users/premium/:uid", /* validateAdmin, */ changeRol);
+routerUser.put("/users/premium/:uid", validateAdmin, changeRol);
 
 // Subida de archivos.
 routerUser.post("/users/:uid/documents", validate, docUpload.fields([

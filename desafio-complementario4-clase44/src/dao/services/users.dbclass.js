@@ -88,7 +88,7 @@ class UsersDB {
         }
     };
 
-    // Cambiar rol de usuario.
+    // Cambiar rol de usuario, si tiene docs necesarios para a ser de user a premium.
     changeRol = async(id) => {
         try {
             const user = await userModel.findById(id).lean()
@@ -98,16 +98,25 @@ class UsersDB {
                 throw new Error("No se encontrón el usuario");
             }
 
-            const requiredDocs = ["identificacion", "domicilio", "statusDeCuenta"]
+            let docsArray = user.documents;
+            const documentNames = docsArray.map((doc) => doc.name);
 
-            const uploadedDocs = user.documents.map(doc => doc.reference);
-
-            if(requiredDocs.every(doc => uploadedDocs.includes(doc))) {
-                await userModel.findByIdAndUpdate(id, { role: "premium" });
-                this.statusMsg = "Rol cambiado con éxito";
-            } else {
-                this.statusMsg = "Faltan documentos para poder cambiar el rol";
+            if(user.role == "premium") {
+                user.role = "user";
             }
+
+            await userModel.findByIdAndUpdate(id, user);
+
+            if(user.role == "user") {
+                if(documentNames.includes(
+                    "identificacion" && "domicilio" && "statusDeCuenta"
+                )) {
+                    user.role = "premium";
+                }
+            };
+
+            await userModel.findByIdAndUpdate(id, user);
+            
         } catch(err) {
             this.statusMsg = `changeRol: ${err.message}`;
         }
